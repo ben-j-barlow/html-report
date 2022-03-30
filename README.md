@@ -248,7 +248,7 @@ Parameters:
 
 ## Usage example 
 
-See rendered version of the example [here](https://htmlpreview.github.io/?https://github.com/ben-j-barlow/html-report/blob/master/example/report.html).
+Download the example [here](https://github.com/ben-j-barlow/html-report/blob/master/example/report.html) and open in browser to see the rendered version of the report.
 
 ```
 from pathlib import Path
