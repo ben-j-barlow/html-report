@@ -6,7 +6,7 @@ Jump to [quickstart](#quickstart) or [example report](#usage-example).
 
 ### What is it?
 
-A simple package that empowers data enthusiasts to produce interactive HTML reports - containing tables produced with [*pandas*](https://github.com/pandas-dev/pandas) and plots produced with [*plotly*](https://github.com/plotly/plotly.py) - fast. The package takes care of the grunt work, thereby allowing you to focus your time on what matters: exploring your data.
+A simple package that empowers data enthusiasts to quickly produce interactive HTML reports, containing tables produced with [*pandas*](https://github.com/pandas-dev/pandas) and plots produced with [*plotly*](https://github.com/plotly/plotly.py). The package takes care of the grunt work, thereby allowing you to focus your time on what matters: exploring your data.
 
 ### Main features
 
@@ -14,15 +14,15 @@ The main features of the package are as follows:
 
 * Summarise your data analysis by outputting interactive HTML reports containing tables and plots. 
 * Complete abstraction of HTML and CSS syntax is achieved by wrapping [*dominate*](https://github.com/Knio/dominate).
-* Isolate related results from the remainder of the report using section functionality of package's `HTMLReport` class. See use of section functionality in [example report](#usage-example).
-* Separate related results onto different tabs using package's `Tabby` class. See use of Tabby in [example report](#usage-example).
+* Isolate related results from the remainder of the report using section functionality of the package's `HTMLReport` class. See use of section functionality in [example report](#usage-example).
+* Separate related results onto different tabs using the package's `Tabby` class. See use of Tabby in [example report](#usage-example).
 
 ### Project vision and status
 
 Future development will have two aims:
 
-1. improve ability to draw and share value from data, and
-2. improve automatic visual appearance of reports.
+1. Improve ability to draw and share value from data, and
+2. Improve automatic visual appearance of reports.
 
 Development will prioritise (1), since the aim of the project is to speed up the journey from analysis to reporting (rather than facilitate aesthetically pleasing output). Manual addition of CSS can improve report appearance if desired.
 
@@ -48,7 +48,7 @@ Do you share static data - for example, screenshots of DataFrames and Figures fr
 
 Sharing code (that performs analysis) likely means GitHub or GitLab is in use. Whilst this comes with the ability to rollback a data pull function, static data or the method of analysis to a specific point in time, it also has shortcomings:
 
-* Each new colleague that wishes to view the output must clone the repository and execute the analysis, which is sub-optimal. This could be especially time consuming if the data pull (if required) and anaylsis-producing code is computationally expensive.
+* Each new colleague who wishes to view the output must clone the repository and execute the analysis, which is sub-optimal. This could be especially time consuming if the data pull (if required) and anaylsis-producing code is computationally expensive.
 * Non-technical colleagues may fail to understand the output due to their inability to digest the code, and may be incapable of producing the output altogether.
 
 #### Suggestion: use *html-report*!
@@ -57,7 +57,7 @@ A suggested workflow when using the package is:
 
 1. Create a GitHub or GitLab repo.
 2. Write Python code to perform analysis.
-3. Embed use of the package in project's code so that a new report is produced upon code execution.
+3. Embed use of the package in the project's code so that a new report is produced upon code execution.
 
 This workflow has the following advantages over other approaches:
 
@@ -66,21 +66,21 @@ This workflow has the following advantages over other approaches:
 * Use of markdown reaps all the benefits of markdown style formatting.
 * Use of HTML and CSS allows users willing to get their hands dirty with CSS to produce visually appealing reports.
 * A set of *.html* files in a local directory can be easily organsied and distributed, unlike a set of screenshots in a chat history.
-* Non-technical colleagues are guaranteed to be familiar with *.html* files.
+* Non-technical colleagues are highly likely to be familiar with *.html* files.
 * Use of version control brings the same advantages as approach 2 (above).
 
 ## Usage
-### Installation 
+### Installation
 
 The package will be available for installation from PyPI soon.
 
 ### Understanding the package
 
-The functionality of the package is intentionally simple: you can only add content to your report. You can't edit content, view the order of content or delete content from an instance of `HTMLReport`. This may lead to the following problems:
+The functionality of the package is intentionally simple: you can only add content to your report. This may lead to the following queries:
 
-1. *You want to view the content of your report?* Solution: Render using `save()` and view in browser!
-2. *You want to delete content from your report?* Solution: Comment out / delete a few lines of code and re-run your report building code to create a new instance of `HTMLReport`!
-3. *You want to change the order of content in your report?* Solution: Swap a few lines of code and re-run your report building code to create a new instance of `HTMLReport`!
+1. *How do I view the content of my report?* Solution: Render using `save()` and view in browser!
+2. *How do I delete content from my report?* Solution: Comment out / delete a few lines of code and re-run your report building code to create a new instance of `HTMLReport`!
+3. *How do I change the order of content in my report?* Solution: Swap a few lines of code and re-run your report building code to create a new instance of `HTMLReport`!
 
 Given the approaches suggested by (2) and (3), it's advisable to separate your report building code and computationally intensive code (e.g. iterating over a large DataFrame), thereby enabling you to create an updated copy of your report fast.
 
