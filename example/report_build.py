@@ -1,8 +1,10 @@
 from pathlib import Path
 
+import dominate.tags as dt
 import plotly.express as px
 import seaborn as sns
 
+from example.util import embed_js_in_report
 from htmlreport import HTMLReport, Tabby
 
 iris = sns.load_dataset("iris")
@@ -83,6 +85,7 @@ rep.add_para(
 )
 rep.add(obj=tab_spec, sec="spec")
 
+rep = embed_js_in_report(rep=rep)
 
 output = rep.to_html()  # output as str
 rep.save(
