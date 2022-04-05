@@ -12,7 +12,7 @@ def embed_js_in_report(rep: "HTMLReport") -> "HTMLReport":
     rep.document.head.add(dt.script(src="bootstrap-4.3.1.js"))
     rep.document.head.add(dt.script(src="jquery-3.3.1.js"))
     rep.document.head.add(dt.script(src="plotly-1.58.5.js"))
-    rep.document.head.add(dt.script(src="bootstrap-4.3.1.css", rel="stylesheet"))
+    rep.document.head.add(dt.link(src="bootstrap-4.3.1.css", rel="stylesheet"))
     return rep
 
 
