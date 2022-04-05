@@ -1,4 +1,5 @@
 import urllib
+from pathlib import Path
 from typing import TYPE_CHECKING
 
 import dominate.tags as dt
@@ -8,16 +9,13 @@ if TYPE_CHECKING:
 
 
 def embed_js_in_report(rep: "HTMLReport") -> "HTMLReport":
-    target_url = [
-        "https://cdn.plot.ly/plotly-latest.min.js",
-        "https://code.jquery.com/jquery-3.3.1.slim.min.js",
-        "https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js",
-    ]
-    for url in target_url:
-        rep.add(dt.script(read_js(target_url=url)))
+    rep.document.head.add(dt.script(src="bootstrap-4.3.1.js"))
+    rep.document.head.add(dt.script(src="jquery-3.3.1.js"))
+    rep.document.head.add(dt.script(src="plotly-1.58.5.js"))
+    rep.document.head.add(dt.script(src="bootstrap-4.3.1.css", rel="stylesheet"))
     return rep
 
 
-def read_js(target_url):
-    file = urllib.request.urlopen(target_url)
-    return file.read()
+def read_js(file_name):
+    with open(Path(__file__).parent / file_name) as file:
+        return file.read()
