@@ -20,6 +20,6 @@ jobs:
       - name: Generate Lock File
         run: poetry lock
       - name: Install venv
-        run: poetry install --no-root -E all
+        run: poetry install --no-root
       - name: Pytest
         run: poetry run python -m pytest
