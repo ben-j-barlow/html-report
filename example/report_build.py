@@ -3,6 +3,7 @@ from pathlib import Path
 import plotly.express as px
 import seaborn as sns
 
+from example.util import embed_js_in_report
 from htmlreport import HTMLReport, Tabby
 
 iris = sns.load_dataset("iris")
@@ -49,6 +50,8 @@ rep = HTMLReport(
     default_section_width="70%",
 )
 
+rep = embed_js_in_report(rep=rep)
+
 rep.add_section(id="summ")
 rep.add_header(content="Data Overview", sec="summ")
 rep.add_markdown(
@@ -82,7 +85,6 @@ rep.add_para(
     sec="spec",
 )
 rep.add(obj=tab_spec, sec="spec")
-
 
 output = rep.to_html()  # output as str
 rep.save(
