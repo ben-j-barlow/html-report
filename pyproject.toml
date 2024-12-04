@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "html-data-report"
-version = "0.0.1"
+version = "0.0.2"
 description = "This package should be used to create HTML reports that summarise the results of data analyses."
 authors = ["Ben Barlow <ben.j.barlow.1@gmail.com>"]
 license = "GNU LGPLv2.1"
