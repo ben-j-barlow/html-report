@@ -126,3 +126,13 @@ def test_add_plotly_figure(generate_mini_data):
     rep.add(obj=px.scatter(generate_mini_data, x="A", y="B"))
     assert rep.document.body[0]
     assert "plotly-graph-div" in rep.document.body[0].text
+
+
+def test_add_matplotlib_figure(matplotlib_figure):
+    rep = HTMLReport()
+    assert len(rep.document.body) == 0
+    rep.add_section(id="my_sec", width="50%")
+    assert len(rep.document.body) == 1
+    assert len(rep.section["my_sec"]) == 1
+    rep.add(obj=matplotlib_figure, sec="my_sec")
+    assert len(rep.document.body) == 1

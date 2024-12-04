@@ -6,12 +6,14 @@ import dominate.tags as dt
 import dominate.util as du
 import markdown
 from dominate.tags import dom_tag
+from matplotlib.pyplot import Figure as MatplotlibFigure
 from pandas import DataFrame
 from pandas.io.formats.style import Styler
-from plotly.graph_objects import Figure
+from plotly.graph_objects import Figure as PlotlyFigure
 
 from htmlreport.share import (
     _add_header,
+    _add_matplotlib_figure,
     _add_pandas_dataframe,
     _add_pandas_styler,
     _add_plotly_figure,
@@ -45,7 +47,7 @@ class Tabby:
     def add(
         self,
         key: Any,
-        obj: Union[dom_tag, DataFrame, Styler, Figure],
+        obj: Union[dom_tag, DataFrame, Styler, PlotlyFigure, MatplotlibFigure],
     ) -> None:
         """
         Add instance of pandas DataFrame, pandas Styler or plotly Figure to tab. Can add instance of dominate dom_tag \
@@ -62,15 +64,18 @@ class Tabby:
             self.data[key].append(du.raw(_add_pandas_dataframe(obj=obj)))
         elif isinstance(obj, Styler):
             self.data[key].append(du.raw(_add_pandas_styler(obj=obj)))
-        elif isinstance(obj, Figure):
+        elif isinstance(obj, PlotlyFigure):
             self.plotly = True
             self.data[key].append(du.raw(_add_plotly_figure(plot=obj)))
+        elif isinstance(obj, MatplotlibFigure):
+            self.data[key].append(du.raw(_add_matplotlib_figure(plot=obj)))
         elif isinstance(obj, dt.dom_tag):
             self.data[key].append(obj)
         else:
             raise TypeError(
-                "obj must be an instance of pandas.DataFrame, pandas.io.formats.style.Styler, plotly.Figure or "
-                "dominate.tags.dom_tag"
+                "obj must be an instance of pandas.DataFrame, "
+                "pandas.io.formats.style.Styler, plotly.Figure, "
+                "matplotlib.pyplot.Figure, or dominate.tags.dom_tag"
             )
 
     def add_para(self, key: Any, content: str) -> None:

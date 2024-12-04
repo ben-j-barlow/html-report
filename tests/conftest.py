@@ -1,3 +1,4 @@
+import matplotlib.pyplot as plt
 import numpy as np
 import pandas as pd
 import pytest
@@ -15,3 +16,29 @@ def generate_mini_data():
         index=[0, 1, "All"],
         columns=["A", "B", "C", "All"],
     )
+
+
+@pytest.fixture
+def matplotlib_figure(generate_mini_data):
+    fig = plt.figure(figsize=(10, 6))
+    ax = plt.gca()
+    width = 0.8
+    x = range(len(generate_mini_data.columns))
+
+    for i, row in enumerate(generate_mini_data.index[:-1]):
+        ax.bar(
+            [xi + width * i / 2 for xi in x],
+            generate_mini_data.loc[row],
+            width=width / 2,
+            label=f"Group {row}",
+        )
+
+    ax.plot(x, generate_mini_data.loc["All"], "r-o", label="All", linewidth=2)
+
+    ax.set_xticks(x)
+    ax.set_xticklabels(generate_mini_data.columns)
+    ax.legend()
+    ax.grid(True, alpha=0.3)
+    plt.title("Data Comparison by Group")
+
+    return fig

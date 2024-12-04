@@ -108,3 +108,11 @@ def test_add_plotly_figure(generate_mini_data):
     tab.add(key="A", obj=px.scatter(generate_mini_data, x="A", y="B"))
     assert tab.data["A"]
     assert "plotly-graph-div" in tab.data["A"][0].text
+
+
+def test_add_matplotlib_figure(matplotlib_figure):
+    tab = Tabby()
+    assert not tab.data["A"]
+    tab.add(key="A", obj=matplotlib_figure)
+    assert tab.data["A"]
+    assert "data:image/png;base64" in tab.data["A"][0].text

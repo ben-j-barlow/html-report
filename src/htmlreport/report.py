@@ -8,13 +8,15 @@ import dominate.tags as dt
 import dominate.util as du
 import markdown
 from dominate.tags import dom_tag
+from matplotlib.pyplot import Figure as MatplotlibFigure
 from pandas import DataFrame
 from pandas.io.formats.style import Styler
-from plotly.graph_objects import Figure
+from plotly.graph_objects import Figure as PlotlyFigure
 
 from htmlreport.javascript import _get_plotly_resize_script
 from htmlreport.share import (
     _add_header,
+    _add_matplotlib_figure,
     _add_pandas_dataframe,
     _add_pandas_styler,
     _add_plotly_figure,
@@ -111,7 +113,7 @@ class HTMLReport:
 
     def add(
         self,
-        obj: Union[Tabby, dom_tag, DataFrame, Styler, Figure],
+        obj: Union[Tabby, dom_tag, DataFrame, Styler, PlotlyFigure, MatplotlibFigure],
         sec: Optional[str] = None,
     ) -> None:
         """
@@ -136,13 +138,16 @@ class HTMLReport:
             to_add.add(du.raw(_add_pandas_dataframe(obj=obj)))
         elif isinstance(obj, Styler):
             to_add.add(du.raw(_add_pandas_styler(obj=obj)))
-        elif isinstance(obj, Figure):
+        elif isinstance(obj, PlotlyFigure):
             if not self.plotly_activated:
                 self._activate_plotly()
             to_add.add(du.raw(_add_plotly_figure(plot=obj)))
+        elif isinstance(obj, MatplotlibFigure):
+            to_add.add(du.raw(_add_matplotlib_figure(plot=obj)))
         else:
             raise TypeError(
-                "obj must be an instance of pandas.DataFrame, pandas.io.formats.style.Styler, plotly.Figure, "
+                "obj must be an instance of pandas.DataFrame, "
+                "pandas.io.formats.style.Styler, plotly.Figure, matplotlib.Figure, "
                 "dominate.tags.dom_tag or htmlreport.Tabby"
             )
 
