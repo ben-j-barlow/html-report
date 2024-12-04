@@ -2,10 +2,13 @@ from typing import TYPE_CHECKING, Union
 
 import dominate.tags as dt
 
+from htmlreport.helper import get_mpl_plot_as_base64
+
 if TYPE_CHECKING:
+    from matplotlib.pyplot import Figure as MatplotlibFigure
     from pandas import DataFrame
     from pandas.io.formats.style import Styler
-    from plotly.graph_objects import Figure
+    from plotly.graph_objects import Figure as PlotlyFigure
 
 
 def _add_pandas_dataframe(obj: "DataFrame") -> str:
@@ -18,7 +21,7 @@ def _add_pandas_styler(obj: "Styler") -> str:
     return html
 
 
-def _add_plotly_figure(plot: "Figure") -> str:
+def _add_plotly_figure(plot: "PlotlyFigure") -> str:
     html = plot.to_html(
         include_plotlyjs=False,
         full_html=False,
@@ -27,6 +30,10 @@ def _add_plotly_figure(plot: "Figure") -> str:
         config={"responsive": True},
     )
     return html
+
+
+def _add_matplotlib_figure(plot: "MatplotlibFigure") -> str:
+    return f'<img src="data:image/png;base64,{get_mpl_plot_as_base64(fig=plot)}">'
 
 
 def _add_header(
